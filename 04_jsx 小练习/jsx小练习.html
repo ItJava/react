@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Hello React</title>
+	</head>
+	<body>
+		<!-- 准备好一个容器 -->
+		<div id="test"></div>
+		<!-- 引入一个react 核心库 -->
+		<script type="text/javascript" src="../js/react.development.js"></script>
+		<!-- 引入react-dom.用于支持react 操作dom -->
+		<script type="text/javascript" src="../js/react-dom.development.js"></script>
+		
+		<!-- 引入一个babel，用于 将jsx转为js -->
+		<script type="text/javascript" src="../js/17.0.1/babel.min.js"></script><!-- React DOM -->
+ 		
+		<!-- 此处一定要写babel  -->
+		<script type="text/babel">
+		//第一步创建虚拟DOM 
+		// 模拟一些数据
+		/*
+		一定要区分：【就是语句（代码）与【js表达式】
+		   1、表达式：一个表达式会产生一个值，可以放在任何一个需要值的地方
+		      下面都是表达式：
+			    - a  ：
+				- a+b
+				- demo(1)
+				- arr.map()  数组中的有个map 方法，用于加工数组
+				- function test(){} 
+				
+			2 语句(代码)：
+				下面这些都是语句
+				if
+				for
+				switch
+				
+				 
+				
+		*/
+		const data=['Angular','React','Vue']
+		const data2=[<li>Angular</li>,<li>React</li>,<li>Vue</li>]
+		const VDOM=(
+		   <div>
+		   <h1> 前端JS框架 </h1>
+		     <ul>
+				 {
+				    data.map((item,index)=>{
+						return <li key={index}>{item}</li>
+					})
+				 }
+			 </ul>
+		   </div>
+		)
+		
+		ReactDOM.render(VDOM,document.getElementById('test'))
+		</script>		 
+	</body>
+</html>
