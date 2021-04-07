@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Hello React</title>
+	</head>
+	<body>
+		<!-- 准备好一个容器 -->
+		<div id="test1"></div>
+		<div id="test2"></div>
+		<div id="test3"></div>
+		<!-- 引入一个react 核心库 -->
+		<script type="text/javascript" src="../js/react.development.js"></script>
+		<!-- 引入react-dom.用于支持react 操作dom -->
+		<script type="text/javascript" src="../js/react-dom.development.js"></script>
+		
+		<!-- 引入一个babel，用于 将jsx转为js -->
+		<script type="text/javascript" src="../js/17.0.1/babel.min.js"></script><!-- React DOM -->
+ 		
+		<!-- 引入一个prop-types  限制react 对象 -->
+		<script type="text/javascript" src="../js/17.0.1/prop-types.js"></script><!-- React DOM -->
+		
+		
+		<!-- 此处一定要写babel  -->
+		<script type="text/babel">
+		 // 创建组件
+		 class Person extends React.Component{
+			 
+			 //构造器是否接收props,是否传递给super，取决于：是否希望在构造器中通过this访问props,来做一些判断呢
+			 // 参考官网：https://zh-hans.reactjs.org/docs/react-component.html#constructor
+			 constructor(props){
+				// console.log(props)
+				 super(props)
+				 console.log('constructor:',props)
+			 }
+			 
+			 render(){
+				 console.log(this)
+				 const {name,age,sex}=this.props
+				// this.props.name='jack'  此行代码会报错的，因为props 是只读的
+				 return (
+				 <ul>
+				   <li>姓名:{name}</li>
+				   <li>年龄:{age+1}</li>
+				   <li>性别:{sex}</li>
+				 </ul>
+				 )
+			 }
+			 
+			 static prototypes={
+			 			 name:PropTypes.string.isRequired,    // 限制name 必传  且为字符串
+			 			 sex:PropTypes.string.isRequired,     // 限制sex 必传   且为字符串
+			 			 age:PropTypes.number                 // 限制age     且为number类型
+			 }
+			 static  defaultProps={
+			 			 sex:'男',
+			 			 age:18
+			 }
+			 
+			 
+		 }
+		 
+		 
+	
+	 
+		 const p ={name:'哈哈'}
+		 ReactDOM.render(<Person {...p}/>,document.getElementById('test3'))   //这个语法糖{...p}   .. 展开运算符
+		 
+		 
+		 function speak(){
+			 console.log('speak...')
+		 }
+		 
+		</script>		 
+	</body>
+</html>
