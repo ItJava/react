@@ -6,7 +6,9 @@
 	</head>
 	<body>
 		<!-- 准备好一个容器 -->
-		<div id="test"></div>
+		<div id="test1"></div>
+		<div id="test2"></div>
+		<div id="test3"></div>
 		<!-- 引入一个react 核心库 -->
 		<script type="text/javascript" src="../js/react.development.js"></script>
 		<!-- 引入react-dom.用于支持react 操作dom -->
@@ -17,17 +19,29 @@
  		
 		<!-- 此处一定要写babel  -->
 		<script type="text/babel">
-		
-		
-			const VDOM=<h1>hello,React</h1>   
-			const VDOM2=<h1>hello,Life</h1>
-			
-			ReactDOM.render(VDOM,document.getElementById('test'))	
-			ReactDOM.render(VDOM2,document.getElementById('test'))
-			
+		 // 创建组件
+		 class Person extends React.Component{
+			 // state={name:'wfc',age:18,sex:'boy'}
+			 render(){
+				 console.log(this)
+				 const {name,age,sex}=this.props
+				 return (
+				 <ul>
+				   <li>姓名:{name}</li>
+				   <li>姓名:{age}</li>
+				   <li>性别:{sex}</li>
+				 </ul>
+				 )
+			 }
+		 }
+		 //渲染组件
+		 ReactDOM.render(<Person name='汪方晨' age='30' sex='boy'/>,document.getElementById('test1'))
+		 ReactDOM.render(<Person name='老牛' age='31' sex='girl'/>,document.getElementById('test2'))
+		 const p ={name:'哈哈',age:'19',sex:'dog'}
+		 //ReactDOM.render(<Person name={p.name} age={p.age} sex={p.sex}/>,document.getElementById('test3')) 
+		 ReactDOM.render(<Person {...p}/>,document.getElementById('test3'))   //这个语法糖{...p}   .. 展开运算符
+		 
+		 
 		</script>		 
-
-		
-	 
 	</body>
 </html>
