@@ -28,16 +28,16 @@
 				 return (
 				 <ul>
 				   <li>姓名:{name}</li>
-				   <li>姓名:{age}</li>
+				   <li>姓名:{age+1}</li>
 				   <li>性别:{sex}</li>
 				 </ul>
 				 )
 			 }
 		 }
 		 //渲染组件
-		 ReactDOM.render(<Person name='汪方晨' age='30' sex='boy'/>,document.getElementById('test1'))
-		 ReactDOM.render(<Person name='老牛' age='31' sex='girl'/>,document.getElementById('test2'))
-		 const p ={name:'哈哈',age:'19',sex:'dog'}
+		 ReactDOM.render(<Person name='汪方晨' age={30} sex='boy'/>,document.getElementById('test1'))
+		 ReactDOM.render(<Person name='老牛' age={31} sex='girl'/>,document.getElementById('test2'))
+		 const p ={name:'哈哈',age:32,sex:'dog'}
 		 //ReactDOM.render(<Person name={p.name} age={p.age} sex={p.sex}/>,document.getElementById('test3')) 
 		 ReactDOM.render(<Person {...p}/>,document.getElementById('test3'))   //这个语法糖{...p}   .. 展开运算符
 		 
