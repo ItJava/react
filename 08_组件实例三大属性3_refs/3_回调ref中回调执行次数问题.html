@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Hello React</title>
+	</head>
+	<body>
+		<!-- 准备好一个容器 -->
+		<div id="test"></div>
+		<!-- 引入一个react 核心库 -->
+		<script type="text/javascript" src="../js/react.development.js"></script>
+		<!-- 引入react-dom.用于支持react 操作dom -->
+		<script type="text/javascript" src="../js/react-dom.development.js"></script>
+
+		<!-- 引入一个babel，用于 将jsx转为js -->
+		<script type="text/javascript" src="../js/17.0.1/babel.min.js"></script><!-- React DOM -->
+
+		<!-- 此处一定要写babel  -->
+		<script type="text/babel">
+			// 查看  官网文档：https://react.docschina.org/docs/refs-and-the-dom.html
+		// 创建一个组件
+		 class Demo extends React.Component{
+			 
+			 state={isHot:true}
+			 
+			 // 赋值语句加箭头形式的函数
+			 showInfo=()=>{ 
+				 const {input1}=this
+				 alert(input1.value)
+			 }
+			 
+			 
+			 // 赋值语句加箭头形式的函数
+			 changeWeather=()=>{ 
+			 		// 获取原来
+				const {isHot}=this.state
+				// 更新状态
+				this.setState({isHot:!isHot})				 
+			 }
+			 
+			 // 赋值语句加箭头形式的函数
+			 saveInput=(c)=>{ 
+			 		 this.input1=c   // 把接到的节点  放在input1 上
+					 console.log('@',c)
+			 }
+			 
+			 
+			 
+			 			
+			 
+			
+			 /*   下面ref 回调函数讲解，自己始终不太明白：  
+			    1） 拿到当前ref 所在的节点   ref帮调用函数  传递进入函数中  挂在实例自身 放在input1 的属性上 
+				 */
+			 render(){
+				 const {isHot}=this.state
+				 return (
+					  <div>
+					     <h2> 今天天气很{isHot?'炎热':'凉爽'} </h2>
+						{/* <input ref={(c)=>{this.input1=c ;console.log('@',c);}}  type='text'/>&nbsp;&nbsp; */} 
+						<input ref={this.saveInput}  type='text'/>&nbsp;&nbsp;
+						 <button onClick={this.showInfo}>点我提示输入的数据</button>
+						 <button onClick={this.changeWeather}>点击我切换天气</button>
+					   </div>
+				 )
+			 }
+		 }
+		
+		 // 渲染组件
+		 ReactDOM.render(<Demo a='1' b='2'/>,document.getElementById('test'))
+		</script>
+	</body>
+</html>
