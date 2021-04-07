@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			
+			 let arr1=[1,3,5,7,9]
+			 let arr2=[2,4,6,8,10]
+			 console.log(...arr1)   //用法一）三点运算符，展开的是一个 数组值
+			 console.log(arr1)      //数组对象
+			 let arr3=[...arr1,...arr2]   //用法二）连接数组
+			 console.log(arr3)
+			 
+			 //用法三）配合函数使用   
+			 function sum(...numbers){
+				 console.log('@',numbers)
+				return numbers.reduce((prevalue,currentValue)=>{
+					 return prevalue+currentValue
+				 })
+				//return a+b
+				}
+			 
+			 console.log(sum(1,2,3,4,5))
+			 
+			 
+			 // 用法四） 构造字面量对象时 使用展开语法
+			 let person={name:'wangfangchen',age:18}
+			// console.log(...person)   //三点运算符不能够运用到对象上面，不能够展开一个对象
+			// let person2={...person}  // 外面帶了一個花褲哦好
+			 
+			 let person2=person
+			 person.name='jerry'
+			 console.log(person2.name)   //打印的是jerry
+			 // 下面一定要注意了，克隆对象
+			 person.name='wawahahah'
+			 
+			 // 展开语法：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Spread_syntax
+			 let person3={...person}   //克隆的语法 扩展语法 
+			
+			 console.log(person3)
+			 console.log(person)
+			 
+			 
+			 // 用法五) 合并使用
+			 let person4={...person,name:'jack',address:'湖北'}
+			 console.log(person4)
+			 
+			 
+		</script>
+
+	</body>
+</html>
