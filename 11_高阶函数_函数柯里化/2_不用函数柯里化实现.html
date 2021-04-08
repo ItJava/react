@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Hello React</title>
+	</head>
+	<body>
+		<!-- 准备好一个容器 -->
+		<div id="test"></div>
+		<!-- 引入一个react 核心库 -->
+		<script type="text/javascript" src="../js/react.development.js"></script>
+		<!-- 引入react-dom.用于支持react 操作dom -->
+		<script type="text/javascript" src="../js/react-dom.development.js"></script>
+		
+		<!-- 引入一个babel，用于 将jsx转为js -->
+		<script type="text/javascript" src="../js/17.0.1/babel.min.js"></script><!-- React DOM -->
+ 		
+		<!-- 此处一定要写babel  -->
+		<script type="text/babel">
+	 /*
+	 高阶函数：如果一个函数符合下面两个规范中的任何一个，那该函数就是高阶函数。
+	     -  若A函数，接收参数是一个函数，那么A就可以称之为高阶函数
+	 			 -  若A函数，调用返回值依然是一个函数，那么该函数就是一个高阶函数
+	 			    常用的高阶函数：Promise、setTimeout 、arr.map()
+	 			 函数的柯里化：通过函数调用继续返回函数的方式，实现多次接收参数最后统一处理的函数编码形式。
+				 
+				 这个地方不用柯里化 实现，下面代码是经典：
+				 (event)=>{this.saveFormData('username',event.target.value)}
+				  event  是重点
+				 
+	 
+	 */
+	 
+	 
+	 
+	 
+			 
+		// 创建一个组件
+		 class Login extends React.Component{
+			 
+			 state={
+				 username:'',              //用户名
+			     password:'123456'          //密码
+			 }
+			 
+			 handleSubmit=(event)=>{
+				 event.preventDefault()  // 阻止表单提交
+				 const {username,password}=this.state
+				// alert(username+':'+password)
+				 console.log('username:'+username+'   password:'+password)
+ 			 } 
+			 
+			 // 保存用户名到状态state 中
+			 saveFormData=(dataType,value)=>{   
+					  this.setState({[dataType]:value})    //获取传递过来的变量值，这个地方用的是[] 取值
+				  
+ 			 }
+			 
+			  
+			 
+			 
+			 render(){
+				 return (
+					  <form  action='https://www.baidu.com/' onSubmit={this.handleSubmit} >
+                       用户名:<input  onChange={(event)=>{this.saveFormData('username',event.target.value)}}  type='text' name='username'/>
+                       密码:<input  onChange={(event)=>{this.saveFormData('password',event.target.value)}}  type='password' name='password'/>
+                       <button>登录</button>
+					  </form>
+				 )
+			 }
+		 }
+		
+		 // 渲染组件
+		 ReactDOM.render(<Login/>,document.getElementById('test'))
+		</script>		
+	</body>
+</html>
