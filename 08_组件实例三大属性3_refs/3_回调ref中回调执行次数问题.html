@@ -38,7 +38,7 @@
 				this.setState({isHot:!isHot})				 
 			 }
 			 
-			 // 赋值语句加箭头形式的函数
+			 // 赋值语句  加箭头形式的函数
 			 saveInput=(c)=>{ 
 			 		 this.input1=c   // 把接到的节点  放在input1 上
 					 console.log('@',c)
@@ -49,7 +49,16 @@
 			 			
 			 
 			
-			 /*   下面ref 回调函数讲解，自己始终不太明白：  
+			 /*  
+			  <input ref={(c)=>{this.input1=c ;console.log('@',c);}}  type='text'/>&nbsp;&nbsp;
+			  上面这行代码，用的是标签中直接创建函数，是一个内联函数
+			  
+			  
+			  
+			  
+			  
+			  
+			  下面ref 回调函数讲解，自己始终不太明白：  
 			    1） 拿到当前ref 所在的节点   ref帮调用函数  传递进入函数中  挂在实例自身 放在input1 的属性上 
 				 */
 			 render(){
