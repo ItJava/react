@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Hello React</title>
+	</head>
+	<body>
+		<!-- 准备好一个容器 -->
+		<div id="test"></div>
+		<!-- 引入一个react 核心库 -->
+		<script type="text/javascript" src="../js/react.development.js"></script>
+		<!-- 引入react-dom.用于支持react 操作dom -->
+		<script type="text/javascript" src="../js/react-dom.development.js"></script>
+		
+		<!-- 引入一个babel，用于 将jsx转为js -->
+		<script type="text/javascript" src="../js/17.0.1/babel.min.js"></script><!-- React DOM -->
+ 		
+		<!-- 此处一定要写babel  -->
+		<script type="text/babel">
+			/*
+	
+	        回调函数得满足三个特点:()=>{}
+			1、你定义的函数
+			2、你没有调用
+			3、这个函数最终执行了【由别人调用】
+	        */
+			
+			
+			
+			// 查看  官网文档：https://react.docschina.org/docs/refs-and-the-dom.html
+		// 创建一个组件
+		 class Demo extends React.Component{
+			 
+			 /*
+			 React.createRef() ：
+			  -   调用后可以返回一个容器，该容器可以存储被ref 标识的节点
+			  -    该容器是专人专用的  比如下面代码：
+			  <input ref={this.myRef}    type='text'  placeholder='点击按钮提示数据aaaa' />&nbsp;&nbsp;
+			   <button  ref={this.myRef}    onClick={this.showData}> 惦记我提示左侧的数据</button>&nbsp;&nbsp;
+			   
+			   那么这个myRef 就是button 了，不再是 input
+			   
+			 */
+			 myRef=React.createRef();
+			 myRef2=React.createRef();
+			 
+			 showData=()=>{
+				 console.log('myRef',this.myRef.current)
+				//  const {input1}=this
+				//  alert(input1.value)  
+			 }
+			 
+			 showData2=()=>{
+			 		  const input2=this.myRef2.current.value
+			 		alert(input2)	  
+			 }
+		 
+			 
+			 render(){
+				 return (
+					  <div>
+					     {/* <input ref={currentNode=>this.input1=currentNode}    type='text'  placeholder='点击按钮提示数据' />&nbsp;&nbsp; */}
+ 						<input ref={this.myRef}    type='text'  placeholder='点击按钮提示数据aaaa' />&nbsp;&nbsp;
+						 <button  ref={this.myRef}    onClick={this.showData}> 惦记我提示左侧的数据</button>&nbsp;&nbsp;
+						 <input onBlur={this.showData2} ref={this.myRef2}    type='text'  placeholder='失去焦点提示数据' />&nbsp;&nbsp;
+ 				      </div>
+				 )
+			 }
+		 }
+		
+		 // 渲染组件
+		 ReactDOM.render(<Demo a='1' b='2'/>,document.getElementById('test'))
+		</script>		
+	</body>
+</html>
