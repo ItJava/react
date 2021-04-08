@@ -28,8 +28,12 @@
 				/* console.log("hhhh")
 				 const input1=document.getElementById('input1')
 				 alert(input1.value) */
-				  const {input1}=this.refs
+				  const {input1}=this.refs   // 这个this 是 Demo 这个实例对象，这个语法是结构赋值  可以这么理解：input1=this.refs.input1
+				  
+				  console.log('@',this)
+				  console.log('@',input1)
 				  console.log(input1.value)
+				 
 				 
 			 }
 			 
