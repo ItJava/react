@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>生命周期旧</title>
+	</head>
+	<body>
+		<!-- 准备好一个容器 -->
+		<div id="test1"></div>
+		<!-- 引入一个react 核心库 -->
+		<script type="text/javascript" src="../js/17.0.1/react.development.js"></script>
+		<!-- 引入react-dom.用于支持react 操作dom -->
+		<script type="text/javascript" src="../js/17.0.1/react-dom.development.js"></script>
+		
+		<!-- 引入一个babel，用于 将jsx转为js -->
+		<script type="text/javascript" src="../js/17.0.1/babel.min.js"></script><!-- React DOM -->
+ 		
+		<!-- 此处一定要写babel  -->
+		<script type="text/babel">
+			//生命周期回调函数
+
+			class Count extends  React.Component{
+
+				constructor(props) {
+					console.log('Count-constructor')
+					super(props);
+					this.state ={count:0}
+
+				}
+
+                componentWillMount(){
+					console.log('Count---componentWillMount')
+
+				}
+
+				componentDidMount(){
+					console.log('Count---componentDidMount')
+
+				}
+
+				componentWillUnmount(){
+
+					console.log('Count---componentWillUnmount')
+
+				}
+
+				// 这个就是阀门，是否应该被更新，对着生命周期图对一对    控制组件更新的阀门
+				// 默认底层是返回true， 如果返回false，那么走到这个地方后，就不会走render了，也没就不会刷新了。
+				// 执行完这个方法后，会componentWillUpdate
+				shouldComponentUpdate(){
+					console.log('Count---shouldComponentUpdate')
+					return true
+				}
+
+				// 组件将要更新完毕的钩子  render之前 调用
+				componentWillUpdate(){
+
+					console.log('Count---componentWillUpdate')
+
+				}
+
+				// 组件更新完毕的钩子  render之后 调用
+				componentDidUpdate(){
+					console.log('Count---componentDidUpdate')
+
+				}
+
+				add=()=>{
+					//获取state 状态
+					const {count}=this.state
+                    this.setState({count: count+1})
+
+				}
+				death=()=>{
+				 ReactDOM.unmountComponentAtNode(document.getElementById('test1'))
+
+				}
+				force=()=>{
+				 this.forceUpdate()
+
+				}
+				render(){
+					console.log('Count---render')
+
+					const {count}=this.state
+					return(
+							<div>
+								<h2>当前值:{count}</h2>
+								<button onClick={this.add}>点我+1</button>
+								<button onClick={this.death}>卸载</button>
+								<button onClick={this.force}>不更改任何状态中的数据,强制更新一次</button>
+							</div>
+
+					)
+
+				}
+			}
+
+
+
+			// 父组件A
+			class A extends React.Component{
+				// 初始化状态
+				state ={'carName':'奔驰'}
+				changeCar=()=>{
+					this.setState({carName:'奥拓'})
+				}
+				render(){
+					return(
+							<div>
+							   <div>A</div>
+								<button onClick={this.changeCar}>换成</button>
+								<B carName={this.state.carName}/>
+							</div>
+					)
+				}
+			}
+
+			// 子组件B
+			class B extends React.Component{
+				componentDidMount(){
+					console.log('B ----  componentDidMount')
+				}
+				// 组件将要接收新的props 的钩子
+				// 有一个巨坑 一定要注意：第一次，父组件更新调用一定传递了props，但是这个方法是不会执行的。 只有父组件更新组件状态时候，它才会调用
+				componentWillReceiveProps(){
+					console.log('B ----  componentWillReceiveProps')
+				}
+				// 控制组件是否需要更新
+				shouldComponentUpdate(){
+					console.log('B-----shouldComponentUpdate')
+					return true
+				}
+				componentWillUpdate(){
+					console.log('B-----componentWillUpdate')
+					return true
+				}
+				componentDidUpdate(){
+					console.log('B-----componentDidUpdate')
+					return true
+				}
+				render(){
+					console.log('B-----render')
+
+					return(
+							<div>我是B组件，接收到的车是:{this.props.carName}</div>
+					)
+				}
+
+			}
+
+		 ReactDOM.render(<A/>,document.getElementById('test1'))
+		</script>		 
+
+		
+	 
+	</body>
+</html>

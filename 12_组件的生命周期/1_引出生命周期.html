@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>生命周期</title>
+	</head>
+	<body>
+		<!-- 准备好一个容器 -->
+		<div id="test1"></div>
+		<!-- 引入一个react 核心库 -->
+		<script type="text/javascript" src="../js/react.development.js"></script>
+		<!-- 引入react-dom.用于支持react 操作dom -->
+		<script type="text/javascript" src="../js/react-dom.development.js"></script>
+		
+		<!-- 引入一个babel，用于 将jsx转为js -->
+		<script type="text/javascript" src="../js/babel.min.js"></script><!-- React DOM -->
+ 		
+		<!-- 此处一定要写babel  -->
+		<script type="text/babel">
+			//生命周期回调函数
+
+
+		 //创建组件
+		 class Life extends  React.Component{
+
+
+		 	state={opacity:0.5}
+
+
+		 	death=()=>{      //作为一个事件的回调来用，this会丢，那么就只能够写成一个括号函数
+			/*	//清除定时器
+                clearTimeout(this.timer)*/
+				// 卸载组件
+				ReactDOM.unmountComponentAtNode(document.getElementById('test1'))   // 在哪个节点里被卸载
+			}
+
+			 //组件挂在完毕后调用
+			 componentDidMount(){
+			 	console.log('@','componentDidMount')
+			this.timer=	 setInterval(()=>{           // 把定时器挂载再this的timer
+					 //获取原状态
+					 let {opacity}= this.state
+					 //减小0.1
+					 opacity-=0.1
+					 if(opacity<=0) opacity=1
+					 // 设置新的透明度
+					 this.setState({opacity})
+
+				 },200)
+
+			 }
+
+			 //组件将要被卸载的时候
+			 componentWillUnmount(){
+				 //清除定时器
+				 clearTimeout(this.timer)
+			 }
+
+
+
+
+
+            // render 调用时机：初始化渲染、状态更新后
+			 // render 调用次数 1+n,第一次初始化那一次+更改状态渲染状态  this.setState({opacity})  这里更改了状态动作，就会调用render  界面
+		 	render(){
+		 		console.log('@')
+
+				return(<div>
+					<h2 style={{opacity:this.state.opacity}}>React 学不会怎么办?</h2>
+					<button onClick={this.death}>不活了</button>
+				</div>)
+			}
+		 }
+		 ReactDOM.render(<Life/>,document.getElementById('test1'))
+		</script>		 
+
+		
+	 
+	</body>
+</html>
