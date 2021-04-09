@@ -13,7 +13,7 @@
 		<script type="text/javascript" src="../js/react-dom.development.js"></script>
 		
 		<!-- 引入一个babel，用于 将jsx转为js -->
-		<script type="text/javascript" src="../js/17.0.1/babel.min.js"></script><!-- React DOM -->
+		<script type="text/javascript" src="../js/babel.min.js"></script><!-- React DOM -->
  		
 		<!-- 此处一定要写babel  -->
 		<script type="text/babel">
@@ -55,10 +55,6 @@
 					  this.setState({[dataType]:value})    //获取传递过来的变量值，这个地方用的是[] 取值
 				  
  			 }
-			 
-			  
-			 
-			 
 			 render(){
 				 return (
 					  <form  action='https://www.baidu.com/' onSubmit={this.handleSubmit} >
@@ -69,7 +65,6 @@
 				 )
 			 }
 		 }
-		
 		 // 渲染组件
 		 ReactDOM.render(<Login/>,document.getElementById('test'))
 		</script>		
